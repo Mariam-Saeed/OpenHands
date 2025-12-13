@@ -59,7 +59,6 @@ export function AgentStatus({
   );
 
   const shouldShownAgentLoading =
-    isPausing ||
     curAgentState === AgentState.INIT ||
     curAgentState === AgentState.LOADING ||
     (webSocketStatus === "CONNECTING" && taskStatus !== "ERROR") ||
@@ -98,7 +97,7 @@ export function AgentStatus({
             "hover:bg-[#737373] cursor-pointer",
         )}
       >
-        {shouldShownAgentLoading && <AgentLoading />}
+        {(shouldShownAgentLoading || isPausing) && <AgentLoading />}
         {!shouldShownAgentLoading && shouldShownAgentStop && (
           <ChatStopButton handleStop={handleStop} />
         )}
